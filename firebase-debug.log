@@ -1,0 +1,29 @@
+[debug] [2019-06-17T19:16:54.957Z] ----------------------------------------------------------------------
+[debug] [2019-06-17T19:16:54.959Z] Command:       /usr/local/Cellar/node/11.14.0_1/bin/node /usr/local/bin/firebase serve
+[debug] [2019-06-17T19:16:54.959Z] CLI Version:   7.0.0
+[debug] [2019-06-17T19:16:54.959Z] Platform:      darwin
+[debug] [2019-06-17T19:16:54.959Z] Node Version:  v11.14.0
+[debug] [2019-06-17T19:16:54.960Z] Time:          Mon Jun 17 2019 12:16:54 GMT-0700 (Mountain Standard Time)
+[debug] [2019-06-17T19:16:54.961Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-17T19:16:54.972Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-17T19:16:54.972Z] > authorizing via signed-in user
+[debug] [2019-06-17T19:16:54.972Z] [iam] checking project code-snippets-255de for permissions ["firebase.projects.get"]
+[debug] [2019-06-17T19:16:54.974Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-06-17T19:16:54.974Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-06-17T19:16:55.219Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-17T19:16:55.234Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/code-snippets-255de:testIamPermissions  
+
+[debug] [2019-06-17T19:16:55.597Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-17T19:16:55.600Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/code-snippets-255de  
+ 
+[debug] [2019-06-17T19:16:56.004Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/raffi/github/codeSnippets'...
+[info] 
+[debug] [2019-06-17T19:16:56.008Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/131891731517/clients/_:getWebAppConfig  
+ 
+[debug] [2019-06-17T19:16:56.595Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000

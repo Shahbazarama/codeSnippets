@@ -1,0 +1,30 @@
+const signupForm = document.querySelector('#signupForm');
+const loginForm = document.querySelector('#loginForm');
+
+signupForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const email = document.querySelector('#signupEmail').value;
+  const password = document.querySelector('#signupPassword').value;
+
+  // sign up the user
+  auth.createUserWithEmailAndPassword(email, password).then( (user) => {
+    $('#signupModal').modal('toggle');
+    signupForm.reset();
+    console.log(user)
+  });
+})
+
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const email = document.querySelector('#loginEmail').value;
+  const password = document.querySelector('#loginPassword').value;
+
+  // log the user in
+  auth.signInWithEmailAndPassword(email, password).then( (user) => {
+    $('#loginModal').modal('toggle');
+    loginForm.reset();
+    console.log(user)
+  });
+});
