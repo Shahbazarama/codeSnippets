@@ -32,13 +32,13 @@
       <span class="navbar-brand">Code Snippets</span>
       <span id="userWelcomeText">hello</span>
       <ul class="nav">
-        <li class="nav-item">
+        <li class="nav-item" id="signupButton" style="display:none;">
           <button class="btn btn-primary" data-toggle="modal" data-target="#signupModal">Sign Up</button>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="loginButton" style="display:none;">
           <button class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">Login</button>
         </li>
-        <li class="nav-item" id="logoutButton">
+        <li class="nav-item" id="logoutButton" style="display:none;">
           <button class="btn btn-dark">Logout</button>
         </li>
       </ul>
@@ -149,6 +149,7 @@ function codeSnippetsTutorial() {
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=sunburst"></script>
 
   <script src="/js/auth.js" charset="utf-8"></script>
+  <script src="/js/index.js" charset="utf-8"></script>
 </body>
 
 </html>

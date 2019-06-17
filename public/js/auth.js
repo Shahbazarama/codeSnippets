@@ -4,14 +4,13 @@
   const signupForm = document.querySelector('#signupForm');
   const loginForm = document.querySelector('#loginForm');
   const logoutButton = document.querySelector('#logoutButton');
-  const userWelcomeText = document.querySelector('#userWelcomeText');
 
   // listen for auth status changes
   auth.onAuthStateChanged(user => {
     if (user) {
-      userWelcomeText.innerHTML = 'Welcome, ' + user.email
+      userAuthStateChanged(user);
     } else {
-      userWelcomeText.innerHTML = ''
+      userAuthStateChanged();
     }
   })
 
