@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+  <script src="/codemirror/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
+  <script src="/codemirror/mode/javascript/javascript.js"></script>
   <title>code snippets</title>
 
   <style>
@@ -48,10 +50,15 @@
 
   <div class="container">
     <div class="row">
-      <pre>
-      <textarea>
-      </textarea
-      </pre>
+      <textarea id="codeEntry">
+// Demo code (the actual new parser character stream implementation)
+
+function StringStream(string) {
+  this.pos = 0;
+  this.string = string;
+}
+...
+    </textarea>
 
     </div>
 
@@ -63,9 +70,9 @@
       <textarea name="codeBox" rows="8" cols="80" placeholder="enter your code here"></textarea>
       <button type="submit" name="button">push snippet</button>
     </form> -->
-    <pre class="prettyprint linenums java">
-public static void codeSnippetsTutorial() {
-  String intro = "Create beautiful blocks of code to be shared with the world";
+    <pre class="prettyprint linenums js">
+function codeSnippetsTutorial() {
+  let intro = "Create beautiful blocks of code to be shared with the world"
 }
     </pre>
   </div>
@@ -158,8 +165,8 @@ public static void codeSnippetsTutorial() {
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=sunburst"></script>
 
   <!-- scripts that use other scripts go below -->
-  <script type="text/javascript" src="main.js" charset="utf-8"></script>
-  <script type="text/javascript" src="auth.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/main.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/auth.js" charset="utf-8"></script>
 
 </body>
 

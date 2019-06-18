@@ -9,7 +9,7 @@ const firebaseApp = firebase.initializeApp(
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'js')))
+//app.use(express.static(path.join(__dirname, 'js')))
 app.set('views', './views')
 app.set('view engine', 'ejs');
 

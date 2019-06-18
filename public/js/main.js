@@ -20,3 +20,8 @@ const userAuthStateChanged = (user) => {
     //removeSnippetFeed()
   }
 }
+
+var editor = CodeMirror.fromTextArea(document.getElementById("codeEntry"), {
+    lineNumbers: true,
+    matchBrackets: true
+});
