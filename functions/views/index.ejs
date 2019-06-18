@@ -46,7 +46,16 @@
   </nav>
 
 
+  <div class="container">
+    <div class="row">
+      <pre>
+      <textarea>
+      </textarea
+      </pre>
 
+    </div>
+
+  </div>
 
 
   <div class="container">
@@ -54,9 +63,9 @@
       <textarea name="codeBox" rows="8" cols="80" placeholder="enter your code here"></textarea>
       <button type="submit" name="button">push snippet</button>
     </form> -->
-    <pre class="prettyprint linenums js">
-function codeSnippetsTutorial() {
-  var intro = "Create beautiful blocks of code to be shared with the world"
+    <pre class="prettyprint linenums java">
+public static void codeSnippetsTutorial() {
+  String intro = "Create beautiful blocks of code to be shared with the world";
 }
     </pre>
   </div>
@@ -148,8 +157,10 @@ function codeSnippetsTutorial() {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?skin=sunburst"></script>
 
-  <script src="/js/auth.js" charset="utf-8"></script>
-  <script src="/js/index.js" charset="utf-8"></script>
+  <!-- scripts that use other scripts go below -->
+  <script type="text/javascript" src="main.js" charset="utf-8"></script>
+  <script type="text/javascript" src="auth.js" charset="utf-8"></script>
+
 </body>
 
 </html>

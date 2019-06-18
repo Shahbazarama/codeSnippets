@@ -1,3 +1,5 @@
+const signupForm = document.querySelector('#signupForm');
+const loginForm = document.querySelector('#loginForm');
 const userWelcomeText = document.querySelector('#userWelcomeText');
 const signupButton = document.querySelector('#signupButton');
 const loginButton = document.querySelector('#loginButton');
@@ -9,10 +11,12 @@ const userAuthStateChanged = (user) => {
     signupButton.style.display = 'none'
     loginButton.style.display = 'none'
     logoutButton.style.display = 'block'
+    //setupSnippetFeed()
   } else {
     userWelcomeText.innerHTML = "Sign up today!"
     signupButton.style.display = 'block'
     loginButton.style.display = 'block'
     logoutButton.style.display = 'none'
+    //removeSnippetFeed()
   }
 }
