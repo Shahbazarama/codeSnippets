@@ -14,6 +14,7 @@ signupForm.addEventListener('submit', (e) => {
 
   const email = document.querySelector('#signupEmail').value;
   const password = document.querySelector('#signupPassword').value;
+  const name = document.querySelector('#signupName').value;
 
   // sign up the user
   auth.createUserWithEmailAndPassword(email, password).then((user) => {
@@ -22,6 +23,7 @@ signupForm.addEventListener('submit', (e) => {
 
     // create user profile
     db.collection('users').doc(user.user.uid).set({
+      name: name,
       email: user.user.email,
       userID: user.user.uid
     });

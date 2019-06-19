@@ -8,48 +8,54 @@ const codeEntryForm = document.querySelector('#codeEntryForm');
 const codeEntry = document.querySelector('#codeEntry');
 const snippetFeed = document.querySelector('#snippetFeed');
 
+
 const userAuthStateChanged = (user) => {
   if (user) {
-    userWelcomeText.innerHTML = user.email
+    db.collection('users').doc(user.uid).get().then(doc => {
+      userWelcomeText.innerHTML = `Hello, ${doc.data().name}`
+    })
     signupButton.style.display = 'none'
     loginButton.style.display = 'none'
     logoutButton.style.display = 'block'
     codeEntryForm.style.display = 'block'
-    //setupSnippetFeed()
+    updateFeed(user)
   } else {
     userWelcomeText.innerHTML = "Sign up today!"
     signupButton.style.display = 'block'
     loginButton.style.display = 'block'
     logoutButton.style.display = 'none'
     codeEntryForm.style.display = 'none'
-    //removeSnippetFeed()
+    removeSnippetFeed()
   }
 }
 
-
+const removeSnippetFeed = () => {
+  while (snippetFeed.firstChild) {
+    snippetFeed.removeChild(snippetFeed.firstChild);
+  }
+}
 
 const updateFeed = (user) => {
-  const snippets = [];
+  while (snippetFeed.firstChild) {
+    snippetFeed.removeChild(snippetFeed.firstChild);
+  }
+  var snippetsArray = [];
   db.collection('users').doc(user.uid).collection('snippets').orderBy('date', 'desc').get()
     .then(snapshot => {
-      snapshot.docs.slice().reverse().forEach(doc => {
-        snippets.push(doc.data());
+      snapshot.docs.slice().forEach(doc => {
+        let codeBlock = document.createElement('pre')
+        codeBlock.className = "prettyprint linenums js prettyprinted"
+        codeBlock.innerHTML = PR.prettyPrintOne(doc.data().snippetCode)
+        //codeBlock.append(innerText)
+        let emailText = document.createElement('h4')
+        db.collection('users').doc(user.uid).get().then(doc => {
+          emailText.textContent = doc.data().name
+        })
+        snippetFeed.append(emailText)
+        snippetFeed.append(codeBlock)
       });
     })
     .catch(err => {
       console.log('Error getting documents', err);
     });
-  buildFeed(snippets);
-}
-function buildFeed(snippets) {
-  console.log(snippets.length)
-  for (var i = 0; i < snippets.length; i++) {
-    console.log('hit build feed')
-
-    let codeBlock = document.createElement('pre')
-    codeBlock.className = "prettyprint linenums js"
-    let innerText = document.createTextNode(snippets[i].snippetCode)
-    codeBlock.append(innerText)
-    snippetFeed.append(codeBlock)
-  }
 }

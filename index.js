@@ -1,23 +1,16 @@
-const functions = require('firebase-functions');
 const express = require('express');
-const admin = require('firebase-admin')
 const path = require('path')
-admin.initializeApp(functions.config().firebase);
+const port = process.env.PORT || 8000;
 
 const app = express();
-//app.use(express.static(path.join(__dirname, 'js')))
-app.set('views', './views')
+app.use(express.static(__dirname + '/js'));
+app.use(express.static(__dirname + '/codemirror'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   res.render('index')
 })
 
-exports.app = functions.https.onRequest(app);
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+app.listen(port, function() {
+  console.log('listening on port, ', port);
+})
