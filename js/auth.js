@@ -19,7 +19,12 @@ signupForm.addEventListener('submit', (e) => {
   auth.createUserWithEmailAndPassword(email, password).then((user) => {
     $('#signupModal').modal('toggle');
     signupForm.reset();
-    console.log(user)
+
+    // create user profile
+    db.collection('users').doc(user.user.uid).set({
+      email: user.user.email,
+      userID: user.user.uid
+    });
   });
 })
 
@@ -34,6 +39,7 @@ loginForm.addEventListener('submit', (e) => {
   auth.signInWithEmailAndPassword(email, password).then((user) => {
     $('#loginModal').modal('toggle');
     loginForm.reset();
+    updateFeed(user);
     console.log(user)
   });
 });

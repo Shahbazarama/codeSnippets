@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <script src="/codemirror/lib/codemirror.js"></script>
   <link rel="stylesheet" href="/codemirror/lib/codemirror.css">
   <script src="/codemirror/mode/javascript/javascript.js"></script>
+
   <title>code snippets</title>
 
   <style>
@@ -50,31 +52,21 @@
 
   <div class="container">
     <div class="row">
-      <textarea id="codeEntry">
-// Demo code (the actual new parser character stream implementation)
+      <form id="codeEntryForm" style="display: none; width: 100vw;">
+        <div class="form-group">
+          <label for="codeEntry">You've got 250 characters, let's see some code!</label>
+          <pre><textarea id="codeEntry" class="form-control" rows="7" form="codeEntryForm" maxlength="250" required></textarea></pre>
 
-function StringStream(string) {
-  this.pos = 0;
-  this.string = string;
-}
-...
-    </textarea>
-
+          <button class="btn btn-primary" type="submit" name="codeEntrySubmit">Submit Snippet</button>
+        </div>
+      </form>
     </div>
 
   </div>
 
 
-  <div class="container">
-    <!-- <form>
-      <textarea name="codeBox" rows="8" cols="80" placeholder="enter your code here"></textarea>
-      <button type="submit" name="button">push snippet</button>
-    </form> -->
-    <pre class="prettyprint linenums js">
-function codeSnippetsTutorial() {
-  let intro = "Create beautiful blocks of code to be shared with the world"
-}
-    </pre>
+  <div class="container" id="snippetFeed">
+    <!-- created in buildFeed in main.js -->
   </div>
 
   <!-- Signup Modal -->
@@ -167,6 +159,7 @@ function codeSnippetsTutorial() {
   <!-- scripts that use other scripts go below -->
   <script type="text/javascript" src="/js/main.js" charset="utf-8"></script>
   <script type="text/javascript" src="/js/auth.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/codeEntry.js" charset="utf-8"></script>
 
 </body>
 
