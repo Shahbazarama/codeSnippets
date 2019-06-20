@@ -16,19 +16,21 @@ signupForm.addEventListener('submit', (e) => {
   const password = document.querySelector('#signupPassword').value;
   const name = document.querySelector('#signupName').value;
 
-  // sign up the user
-  auth.createUserWithEmailAndPassword(email, password).then((user) => {
+  // firebase sign up
+  auth.createUserWithEmailAndPassword(email, password).then((userRef) => {
     $('#signupModal').modal('toggle');
     signupForm.reset();
 
     // create user profile
-    db.collection('users').doc(user.user.uid).set({
+    db.collection('users').add({
       name: name,
-      email: user.user.email,
-      userID: user.user.uid
+      email: userRef.user.email,
+      userID: userRef.user.uid,
+      following: [`${userRef.user.email}`]
     });
   });
-})
+
+});
 
 // login
 loginForm.addEventListener('submit', (e) => {
@@ -42,7 +44,6 @@ loginForm.addEventListener('submit', (e) => {
     $('#loginModal').modal('toggle');
     loginForm.reset();
     updateFeed(user);
-    console.log(user)
   });
 });
 

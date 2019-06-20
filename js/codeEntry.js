@@ -5,7 +5,9 @@ codeEntryForm.addEventListener('submit', (e) => {
 
   let codeToBeSaved = codeEntry.value;
   var user = auth.currentUser;
-  db.collection('users').doc(user.uid).collection('snippets').add({
+  db.collection('snippets').add({
+    userID: user.uid,
+    author: user.email,
     date: firebase.firestore.Timestamp.fromDate(new Date()),
     snippetCode: codeToBeSaved
   }).then( () => {
@@ -13,7 +15,7 @@ codeEntryForm.addEventListener('submit', (e) => {
   }).catch( (e) =>{
     console.log('error saving snippet, ', e)
   })
-  codeEntry.value = ''
 
+  codeEntry.value = ''
   updateFeed(user);
 })

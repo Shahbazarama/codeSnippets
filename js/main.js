@@ -1,5 +1,7 @@
 const signupForm = document.querySelector('#signupForm');
 const loginForm = document.querySelector('#loginForm');
+const followForm = document.querySelector('#followForm');
+const followEmail = document.querySelector('#followEmail');
 const userWelcomeText = document.querySelector('#userWelcomeText');
 const signupButton = document.querySelector('#signupButton');
 const loginButton = document.querySelector('#loginButton');
@@ -11,9 +13,12 @@ const snippetFeed = document.querySelector('#snippetFeed');
 
 const userAuthStateChanged = (user) => {
   if (user) {
-    db.collection('users').doc(user.uid).get().then(doc => {
-      userWelcomeText.innerHTML = `Hello, ${doc.data().name}`
+    db.collection('users').where("userID", "==", `${user.uid}`).get().then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        userWelcomeText.innerHTML = `Hello, ${doc.data().name}`
+      })
     })
+    followForm.style.display = ''
     signupButton.style.display = 'none'
     loginButton.style.display = 'none'
     logoutButton.style.display = 'block'
@@ -21,6 +26,7 @@ const userAuthStateChanged = (user) => {
     updateFeed(user)
   } else {
     userWelcomeText.innerHTML = "Sign up today!"
+    followForm.style.display = 'none'
     signupButton.style.display = 'block'
     loginButton.style.display = 'block'
     logoutButton.style.display = 'none'
@@ -36,26 +42,35 @@ const removeSnippetFeed = () => {
 }
 
 const updateFeed = (user) => {
+  // clear current feed
   while (snippetFeed.firstChild) {
     snippetFeed.removeChild(snippetFeed.firstChild);
   }
-  var snippetsArray = [];
-  db.collection('users').doc(user.uid).collection('snippets').orderBy('date', 'desc').get()
-    .then(snapshot => {
-      snapshot.docs.slice().forEach(doc => {
-        let codeBlock = document.createElement('pre')
-        codeBlock.className = "prettyprint linenums js prettyprinted"
-        codeBlock.innerHTML = PR.prettyPrintOne(doc.data().snippetCode)
-        //codeBlock.append(innerText)
-        let emailText = document.createElement('h4')
-        db.collection('users').doc(user.uid).get().then(doc => {
-          emailText.textContent = doc.data().name
-        })
-        snippetFeed.append(emailText)
-        snippetFeed.append(codeBlock)
-      });
+
+  var followingUsers;
+  db.collection('users').where('userID', '==', `${user.uid}`).get().then((snapshot) => {
+    followingUsers = snapshot.docs[0].data().following
+  }).then(() => {
+
+    //var snippetsToLoad = [];
+    db.collection('snippets').orderBy('date', 'desc').get().then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+
+        // check if user is on following list
+        if (followingUsers.includes(doc.data().author)) {
+
+          // DOM to write snippet to window
+          let codeBlock = document.createElement('pre')
+          codeBlock.className = "prettyprint linenums js prettyprinted"
+          codeBlock.innerHTML = PR.prettyPrintOne(doc.data().snippetCode)
+          let emailText = document.createElement('h4')
+          emailText.textContent = doc.data().author
+          snippetFeed.append(emailText)
+          snippetFeed.append(codeBlock)
+        }
+      })
     })
-    .catch(err => {
-      console.log('Error getting documents', err);
-    });
+  })
 }
+
+// set up better text editor
