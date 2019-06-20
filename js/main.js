@@ -4,12 +4,16 @@ const followForm = document.querySelector('#followForm');
 const followEmail = document.querySelector('#followEmail');
 const userWelcomeText = document.querySelector('#userWelcomeText');
 const signupButton = document.querySelector('#signupButton');
+const signupErrorText = document.querySelector('#signupErrorText');
+const loginErrorText = document.querySelector('#loginErrorText');
 const loginButton = document.querySelector('#loginButton');
 const logoutButton = document.querySelector('#logoutButton');
 const codeEntryForm = document.querySelector('#codeEntryForm');
 const codeEntry = document.querySelector('#codeEntry');
 const snippetFeed = document.querySelector('#snippetFeed');
 const deleteButton = document.querySelector('#deleteButton');
+const newUserToast = document.querySelector('#newUserToast');
+const templateSnippetFeed = document.querySelector('#templateSnippetFeed');
 
 const userAuthStateChanged = (user) => {
   if (user) {
@@ -23,6 +27,7 @@ const userAuthStateChanged = (user) => {
     loginButton.style.display = 'none'
     logoutButton.style.display = 'block'
     codeEntryForm.style.display = 'block'
+    templateSnippetFeed.style.display = 'none'
     updateFeed(user)
   } else {
     userWelcomeText.innerHTML = "Sign up today!"
@@ -31,6 +36,7 @@ const userAuthStateChanged = (user) => {
     loginButton.style.display = 'block'
     logoutButton.style.display = 'none'
     codeEntryForm.style.display = 'none'
+    templateSnippetFeed.style.display = ''
     removeSnippetFeed()
   }
 }
@@ -48,7 +54,8 @@ const updateFeed = (user) => {
   }
 
   var followingUsers;
-  db.collection('users').where('userID', '==', `${user.uid}`).get().then((snapshot) => {
+  db.collection('users').where('userID', '==', `${user.uid}`).get()
+  .then((snapshot) => {
     followingUsers = snapshot.docs[0].data().following
   }).then(() => {
 
@@ -64,7 +71,7 @@ const updateFeed = (user) => {
           titleRow.className = 'row justify-content-between'
 
           let codeBlock = document.createElement('pre')
-          codeBlock.className = "prettyprint linenums js prettyprinted"
+          codeBlock.className = "prettyprint js prettyprinted"
           codeBlock.innerHTML = PR.prettyPrintOne(doc.data().snippetCode)
 
           let emailText = document.createElement('h4')
@@ -98,6 +105,8 @@ const updateFeed = (user) => {
         }
       })
     })
+  }).catch ( (e) => {
+    console.log('no posts', e)
   })
 }
 

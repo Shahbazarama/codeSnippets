@@ -1,4 +1,5 @@
 // consts declared in main.js
+
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
   if (user) {
@@ -20,6 +21,10 @@ signupForm.addEventListener('submit', (e) => {
   auth.createUserWithEmailAndPassword(email, password).then((userRef) => {
     $('#signupModal').modal('toggle');
     signupForm.reset();
+    
+    if(userRef.additionalUserInfo.isNewUser){
+      newUserToast.style.display = ''
+    }
 
     // create user profile
     db.collection('users').add({
@@ -28,6 +33,9 @@ signupForm.addEventListener('submit', (e) => {
       userID: userRef.user.uid,
       following: [`${userRef.user.email}`]
     });
+  }).catch( (e) => {
+    // email already in use
+    signupErrorText.style.display = ''
   });
 
 });
@@ -44,6 +52,9 @@ loginForm.addEventListener('submit', (e) => {
     $('#loginModal').modal('toggle');
     loginForm.reset();
     updateFeed(user);
+  }).catch( (e) => {
+    // incorrect pass/email
+    loginErrorText.style.display = ''
   });
 });
 
