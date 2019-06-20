@@ -6,7 +6,6 @@ const app = express();
 
 app.use(express.static(__dirname + '/js'));
 app.use(express.static(__dirname + '/codemirror'));
-app.use(express.static(__dirname + '/ace'));
 
 app.set('view engine', 'ejs');
 

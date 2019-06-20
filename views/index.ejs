@@ -96,7 +96,7 @@
             </fieldset>
             <fieldset class="form-group">
               <label for="signupPassword">enter a password</label>
-              <input id="signupPassword" type="password" class="form-control" name="password" onchange="if(this.checkValidity()) form.signupPasswordCheck.pattern = this.value;" placeholder="password" required />
+              <input id="signupPassword" type="password" class="form-control" name="password" minlength="6" onchange="if(this.checkValidity()) form.signupPasswordCheck.pattern = this.value;" placeholder="password" required />
               <input id="signupPasswordCheck" type="password" class="form-control" name="confirmPassword" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same password as above' : '');"
                 placeholder="confirm password" required />
             </fieldset>
@@ -168,7 +168,7 @@
   <script type="text/javascript" src="auth.js" charset="utf-8"></script>
   <script type="text/javascript" src="codeEntry.js" charset="utf-8"></script>
   <script type="text/javascript" src="follow.js" charset="utf-8"></script>
-
+  
 </body>
 
 </html>
