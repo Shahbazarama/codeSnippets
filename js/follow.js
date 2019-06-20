@@ -13,7 +13,11 @@ followForm.addEventListener('submit', (e) => {
 
     db.collection('users').where('userID', '==', `${userRef.uid}`).get().then((snapshot) => {
       currentFollowing = snapshot.docs[0].data().following
-      currentFollowing.push(emailToFollow)
+      if(!currentFollowing.includes(emailToFollow)){
+        currentFollowing.push(emailToFollow)
+      } else {
+        console.log('already following')
+      }
     }).then(() => {
       db.collection('users').where('userID', '==', `${userRef.uid}`).get().then((snapshot) => {
         snapshot.docs.forEach( (doc) => {
