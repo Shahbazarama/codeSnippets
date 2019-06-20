@@ -29,34 +29,42 @@
 <body>
 
   <!-- NAV BAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+
     <span class="navbar-brand">Code Snippets</span>
-    <span class="navbar-text" id="userWelcomeText"></span>
+    <span class="navbar-text mr-5" id="userWelcomeText"></span>
 
-    <form class="form-inline" id="followForm">
-      <label class="sr-only" for="followEmail">An Email To Follow</label>
-      <div class="input-group mb-2 mr-sm-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Email</div>
-        </div>
-        <input type="email" class="form-control" id="followEmail" placeholder="Follow Another User" required>
-      </div>
-      <button type="submit" class="btn btn-outline-info mb-2">Follow</button>
-    </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCodeSnippets" aria-controls="navbarCodeSnippets" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <ul class="nav">
+    <div class="collapse navbar-collapse" id="navbarCodeSnippets">
+
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item" id="signupButton" style="display:none;">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#signupModal">Sign Up</button>
+          <a class="nav-link" data-toggle="modal" data-target="#signupModal">Sign Up</a>
         </li>
-        <hr style="width: 5px;">
         <li class="nav-item" id="loginButton" style="display:none;">
-          <button class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">Login</button>
+          <a class="nav-link" data-toggle="modal" data-target="#loginModal">Login</a>
         </li>
-        <hr style="width: 5px;">
         <li class="nav-item" id="logoutButton" style="display:none;">
-          <button class="btn btn-outline-dark">Logout</button>
+          <a class="nav-link">Logout</a>
         </li>
-    </ul>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0" id="followForm">
+        <label class="sr-only" for="followEmail">Follow another user</label>
+        <div class="input-group mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Email</div>
+          </div>
+          <input type="email" class="form-control" id="followEmail" placeholder="Follow another user" required>
+        </div>
+        <button type="submit" class="btn btn-outline-info my-2 my-sm-0">Follow</button>
+      </form>
+    </div>
+
   </nav>
 
   <!-- pre signup/login page -->
@@ -81,9 +89,9 @@ signupForm.addEventListener('submit', (e) => {
   <!-- CODE ENTRY FIELD -->
   <div class="container">
     <div class="row">
-      <form id="codeEntryForm" style="display: none; width: 100vw;">
+      <form id="codeEntryForm" style="display: none; width: 100vw;" class="text-center">
         <div class="form-group">
-          <label for="codeEntry">You've got 250 characters, let's see some code!</label>
+          <label for="codeEntry"><strong>You've got 250 characters, let's see some code!</strong></label>
           <textarea id="codeEntry" class="form-control" rows="5" form="codeEntryForm" maxlength="250" required></textarea>
           <button class="form-control btn btn-dark" type="submit" name="codeEntrySubmit">Submit Snippet</button>
         </div>
