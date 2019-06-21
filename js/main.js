@@ -14,6 +14,9 @@ const snippetFeed = document.querySelector('#snippetFeed');
 const deleteButton = document.querySelector('#deleteButton');
 const newUserToast = document.querySelector('#newUserToast');
 const templateSnippetFeed = document.querySelector('#templateSnippetFeed');
+const userFollowingList = document.querySelector('#userFollowingList');
+const dropDownMenu = document.querySelector('#dropDownMenu');
+
 
 const userAuthStateChanged = (user) => {
   if (user) {
@@ -22,6 +25,7 @@ const userAuthStateChanged = (user) => {
         userWelcomeText.innerHTML = `Hello, ${doc.data().name}`
       })
     })
+    dropDownMenu.style.display = ''
     followForm.style.display = ''
     signupButton.style.display = 'none'
     loginButton.style.display = 'none'
@@ -29,8 +33,10 @@ const userAuthStateChanged = (user) => {
     codeEntryForm.style.display = 'block'
     templateSnippetFeed.style.display = 'none'
     updateFeed(user)
+    setUpFollowingList(user)
   } else {
-    userWelcomeText.innerHTML = "Sign up today!"
+    userWelcomeText.innerHTML = ""
+    dropDownMenu.style.display = 'none'
     followForm.style.display = 'none'
     signupButton.style.display = 'block'
     loginButton.style.display = 'block'
@@ -49,17 +55,16 @@ const removeSnippetFeed = () => {
 
 const updateFeed = (user) => {
   // clear current feed
-  while (snippetFeed.firstChild) {
-    snippetFeed.removeChild(snippetFeed.firstChild);
-  }
+  removeSnippetFeed()
 
   var followingUsers;
+
   db.collection('users').where('userID', '==', `${user.uid}`).get()
   .then((snapshot) => {
+    // get data of who the current user is following
     followingUsers = snapshot.docs[0].data().following
   }).then(() => {
 
-    //var snippetsToLoad = [];
     db.collection('snippets').orderBy('date', 'desc').get().then((snapshot) => {
       snapshot.docs.forEach((doc) => {
 

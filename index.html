@@ -33,8 +33,20 @@
   <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
 
     <span class="navbar-brand">Code Snippets</span>
-    <span class="navbar-text mr-5" id="userWelcomeText"></span>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown" id="dropDownMenu">
+        <a class="nav-link dropdown-toggle" href="#" id="userWelcomeText" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item disabled" href="#">Click a user to unfollow</a>
+          <div class="dropdown-divider"></div>
+          <div class="" id="userFollowingList">
+            <!-- added in setUpFollowingList() in follow.js -->
+          </div>
+        </div>
+      </li>
+    </ul>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCodeSnippets" aria-controls="navbarCodeSnippets" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
