@@ -43,6 +43,7 @@ const userAuthStateChanged = (user) => {
     logoutButton.style.display = 'none'
     codeEntryForm.style.display = 'none'
     templateSnippetFeed.style.display = ''
+    newUserToast.style.display = 'none'
     removeSnippetFeed()
   }
 }
@@ -103,7 +104,7 @@ const updateFeed = (user) => {
               })
             })
             titleRow.append(deleteButton)
-            
+
           }
           snippetFeed.append(titleRow)
           snippetFeed.append(codeBlock)
