@@ -102,8 +102,8 @@ const updateFeed = (user) => {
                 })
               })
             })
-
             titleRow.append(deleteButton)
+            
           }
           snippetFeed.append(titleRow)
           snippetFeed.append(codeBlock)
@@ -114,5 +114,3 @@ const updateFeed = (user) => {
     console.log('no posts', e)
   })
 }
-
-// set up better text editor
