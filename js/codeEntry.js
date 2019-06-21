@@ -10,8 +10,6 @@ codeEntryForm.addEventListener('submit', (e) => {
     author: user.email,
     date: firebase.firestore.Timestamp.fromDate(new Date()),
     snippetCode: codeToBeSaved
-  }).then( () => {
-    console.log("snippet saved")
   }).catch( (e) =>{
     console.log('error saving snippet, ', e)
   })

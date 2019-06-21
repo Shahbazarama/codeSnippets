@@ -50,7 +50,7 @@ function setUpFollowingList(user) {
     // build out following list and add event listener to unfollow on click
     clearFollowingList()
     for (var i = 1; i < currentFollowing.length; i++) {
-      console.log(currentFollowing[i])
+
       let followingAnchor = document.createElement('a')
       followingAnchor.className = 'dropdown-item'
       followingAnchor.innerHTML = currentFollowing[i]
